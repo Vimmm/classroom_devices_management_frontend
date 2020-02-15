@@ -1,32 +1,41 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <headers v-if="$route.path !== '/login'" />
+    <!-- <div id="nav">
+      <router-link to="/">Login</router-link> |
+      <router-link to="/admin">Admin</router-link> |
+      <router-link to="/repairer">Repairer</router-link> |
+      <router-link to="/school">School</router-link> 
+    </div> -->
+    <router-view class="app-content"/>
   </div>
 </template>
+
+<script>
+import Headers from './components/common/headers'
+export default {
+  name: 'app',
+  components: {
+    Headers
+  }
+}
+</script>
 
 <style lang="less">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  width: 1000px;
+  margin: 0 auto;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body * {
+  // background-color: rgba(0 ,0, 0, .1);
+}
+.app-content {
+  padding-top: 80px;
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 </style>
