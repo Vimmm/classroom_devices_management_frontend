@@ -20,33 +20,31 @@
         <el-button type="primary" @click="onSubmit">登陆</el-button>
       </el-form-item>
     </el-form>
-    
   </div>
 </template>
 
 <script>
 import api from '../common/fetch'
 export default {
-  name: "Login",
+  name: 'Login',
   data () {
     return {
       form: {
         inputAccount: '',
         inputPasswords: '',
-        inputIdentity: '',
+        inputIdentity: ''
       },
-      imgSrc: require('../assets/images/logo.png'),
-      
+      imgSrc: require('../assets/images/logo.png')
     }
   },
   methods: {
-    onSubmit() {
+    onSubmit () {
       api.login(this.form).then(res => {
         this.$router.push(res)
       })
-      .catch(err => {
-        this.$message.error(err.toString())
-      })
+        .catch(err => {
+          this.$message.error(err.toString())
+        })
     }
   }
 }
@@ -63,7 +61,7 @@ export default {
     font-family: "楷体";
     font-size: 48px;
     color: #303133;
-    margin-bottom: 50px; 
+    margin-bottom: 50px;
   }
   .loginForm {
     width:350px;

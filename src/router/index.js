@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
-import Admin from '../views/Admin.vue'
-import Repairer from '../views/Repairer.vue'
-import School from '../views/School.vue'
+// import Login from '../views/Login.vue'
+// import Admin from '../views/Admin.vue'
+// import Repairer from '../views/Repairer.vue'
+// import School from '../views/School.vue'
 
 Vue.use(VueRouter)
 
@@ -17,7 +17,7 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import(/* webpackChunkName: "Admin" */ '../views/Admin.vue'),
-    redirect:'admin/school-manage',
+    redirect: 'admin/school-manage',
     children: [
       {
         path: 'school-manage',
@@ -38,14 +38,14 @@ const routes = [
         path: 'site-update',
         name: 'siteUpdate',
         component: () => import(/* webpackChunkName: "Admin" */ '../components/admin/SiteUpdate.vue')
-      },
+      }
     ]
   },
   {
     path: '/repairer',
     name: 'repairer',
     component: () => import(/* webpackChunkName: "about" */ '../views/Repairer.vue'),
-    redirect:'repairer/repairer-info',
+    redirect: 'repairer/repairer-info',
     children: [
       {
         path: 'repairer-info',
@@ -66,7 +66,7 @@ const routes = [
         path: 'question-update',
         name: 'questionUpdate',
         component: () => import(/* webpackChunkName: "Admin" */ '../components/repairer/QuestionUpdate.vue')
-      },
+      }
     ]
   },
   {
@@ -75,8 +75,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/School.vue'),
-    
+    component: () => import(/* webpackChunkName: "about" */ '../views/School.vue')
   }
 ]
 

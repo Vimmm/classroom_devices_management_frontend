@@ -22,13 +22,13 @@
 </template>
 
 <script>
-export default { 
-    name: 'headers',
-    data () {
-        return {
-            logoText: require('../../assets/images/hd_logo.png')
-        }
+export default {
+  name: 'headers',
+  data () {
+    return {
+      logoText: require('../../assets/images/hd_logo.png')
     }
+  }
 }
 </script>
 
@@ -37,6 +37,7 @@ export default {
         box-sizing: border-box;
         position: fixed;
         top: 0;
+        z-index: 10000;
         width:1000px;
         height: 80px;
         padding-top:10px;

@@ -1,6 +1,5 @@
 export default [{
-    name: 'login',
-    path: '/api/login',
-    method: 'post'
-  }]
-  
+  name: 'login',
+  path: '/api/login',
+  method: 'post'
+}]

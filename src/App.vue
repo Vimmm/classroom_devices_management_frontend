@@ -5,7 +5,7 @@
       <router-link to="/">Login</router-link> |
       <router-link to="/admin">Admin</router-link> |
       <router-link to="/repairer">Repairer</router-link> |
-      <router-link to="/school">School</router-link> 
+      <router-link to="/school">School</router-link>
     </div> -->
     <router-view class="app-content"/>
   </div>
@@ -36,6 +36,7 @@ body * {
 .app-content {
   padding-top: 80px;
   box-sizing: border-box;
+  width: 1000px;
   min-height: 100vh;
 }
 </style>

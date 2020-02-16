@@ -30,7 +30,7 @@ export default {
   },
   async mounted () {
     api.getAllSchool().then(res => {
-      this.schools = res 
+      this.schools = res
     }).catch(err => this.$message.error(err.toString()))
   }
 }

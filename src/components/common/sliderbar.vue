@@ -8,7 +8,8 @@
             <router-link
                 class="menu"
                 v-for="menu in menuList"
-                :to="{ name: menu.name }">
+                :to="{ name: menu.name }"
+                :key="menu.name">
                 {{menu.text}}
             </router-link>
         </div>
@@ -16,26 +17,27 @@
 </template>
 
 <script>
-export default { 
-    name: 'sliderbar',
-    props: {
-      img: String,
-      identity: String,
-      menuList: Array // name, text
-    }
+export default {
+  name: 'sliderbar',
+  props: {
+    img: String,
+    identity: String,
+    menuList: Array // name, text
+  }
 }
 </script>
 
 <style lang="less" scoped>
 .sliderbar {
     width:160px;
+    flex-shrink: 0;
     background-color: #1295d9;
     .identity {
         margin: 10px;
         .photo {
             width: 80px;
             height: 80px;
-        } 
+        }
     }
     .menus {
         width: 100%;
