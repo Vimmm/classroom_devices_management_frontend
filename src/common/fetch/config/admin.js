@@ -31,4 +31,8 @@ export default [{
   name: 'addRepairer',
   path: `${PREFIX}/addRepairer`,
   method: 'post'
+}, {
+  name: 'getCharts',
+  path: `${PREFIX}/getCharts`,
+  method: 'get'
 }]
