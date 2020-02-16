@@ -2,9 +2,7 @@
   <div class="statisticCharts">
     <h1>This is an StatisticCharts page</h1>
     <div class="charts">
-      <div class="data">
-        <div class="chart" id="mycharts"></div>
-      </div>
+      <div class="chart" id="mycharts"></div>
     </div>
   </div>
 </template>
@@ -13,40 +11,46 @@
 import api from '../../common/fetch'
 export default {
   name: 'statisticCharts',
+  data () {
+    return {
+      source: [],
+      chart: {}
+    }
+  },
   computed: {
     options () {
       return {
         title: {
-          text: 'ECharts 入门示例'
+          text: '教学点维修统计'
         },
         tooltip: {},
         xAxis: {
-          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+          data: this.source.map(it => it.schoolName)
         },
         yAxis: {},
         series: [{
-          name: '销量',
+          name: '次数',
           type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
+          data: this.source.map(it => it.count)
         }]
       }
     }
   },
-  created () {
-    api.getCharts().then(res => {
-      console.log(res)
-      const myChart = this.$echarts.init(document.getElementById('mycharts'))
-      myChart.setOption(this.options)
-    }).catch(err => this.$message.error(err.toString()))
-  },
-  methods: {
-    // init () {
-    //   let _this = this
-    //   this.chart = this.$echarts.init(document.getElementById('mycharts'))
-    // },
-    // setOption (option) {
-    //   this.chart.setOption(option)
-    // }
+  mounted () {
+    this.chart = this.$echarts.init(document.getElementById('mycharts'))
+    Promise.all([
+      api.getCharts(),
+      api.getAllSchool()
+    ])
+      .then(([records, schools]) => {
+        this.source = records.reduce((data, item) => {
+          const index = data.findIndex(it => it.schoolId === item.school)
+          if (index !== -1) data[index].count++
+          else data.push({ schoolName: schools.find(it => it.ID === item.school).name, schoolId: item.school, count: 1 })
+          return data
+        }, [])
+      })
+      .then(_ => this.chart.setOption(this.options))
   }
 }
 </script>
@@ -55,10 +59,9 @@ export default {
 .statisticCharts {
   .charts {
     width: 100%;
-    height: 100px;
     .chart {
       width: 100%;
-      height: 100%;
+      height: 500px;
     }
   }
 }
