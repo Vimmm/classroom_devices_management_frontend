@@ -114,7 +114,7 @@
               <p v-else>{{ deviceStatusOptions.find(option => option.value === scope.row.device_status).label }}</p>
             </template>
           </el-table-column>
-          <el-table-column show-overflow-tooltip fixed="right" label="操作" width="55">
+          <el-table-column show-overflow-tooltip label="操作" width="55">
             <template slot-scope="scope">
               <el-button v-if="scope.row.isEdit" @click="saveSchoolDevice(scope.row)" type="text" size="small">保存</el-button>
               <el-button v-else @click="scope.row.isEdit = true" type="text" size="small">编辑</el-button>

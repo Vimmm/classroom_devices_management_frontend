@@ -19,4 +19,8 @@ export default [{
   name: 'addDevice',
   path: `${PREFIX}/addDevice`,
   method: 'post'
+}, {
+  name: 'getCharts',
+  path: `${PREFIX}/getCharts`,
+  method: 'get'
 }]

@@ -37,7 +37,7 @@ export default {
         box-sizing: border-box;
         position: fixed;
         top: 0;
-        z-index: 10000;
+        z-index: 1000;
         width:1000px;
         height: 80px;
         padding-top:10px;
