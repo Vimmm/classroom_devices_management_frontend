@@ -131,7 +131,7 @@ export default {
         this.addSchoolFrom.tel &&
         this.addSchoolFrom.account &&
         this.addSchoolFrom.passwords) {
-        const [addSchool] = await api.addSchool(this.addSchoolFrom)
+        const [addSchool] = await api.addSchool(this.addSchoolFrom).catch(e => this.$message.error(e.toString()))
         this.schools.push({ ...this.mapSchool(addSchool), devices: [] })
         this.addSchoolDrawer = false
         this.$message.success('添加成功')

@@ -12,7 +12,7 @@
           <el-button type="text" v-if="school.isEdit" @click="saveSchoolBaseInfo">保存</el-button>
           <el-button type="text" v-else @click="school.isEdit = true">编辑基本信息</el-button>
         </div>
-        <el-form class="base-form" :model="school" :rules="rules" ref="school" label-width="100px">
+        <el-form class="base-form" :model="school" :rules="rules" :ref="school.ID" label-width="100px">
           <el-form-item class="base-form-item" label="名称：" prop="name">
             <el-input v-if="school.isEdit" v-model="school.name" placeholder="请输入教学点名称" />
             <p v-else>{{school.name}}</p>
@@ -131,7 +131,7 @@
     direction="rtl"
     >
     <div class="add-school-drawer">
-      <el-form :model="addDeviceFrom" :rules="rules">
+      <el-form :model="addDeviceFrom" :rules="rules" ref="addDevices">
         <el-form-item label="名称：" prop="name">
           <el-input v-model="addDeviceFrom.name" placeholder="请输入名称" />
         </el-form-item>
@@ -273,22 +273,18 @@ export default {
       return school
     },
     async saveSchoolBaseInfo () {
-      if (
-        this.school.name &&
-        !isNil(this.school.type) &&
-        this.school.location &&
-        this.school.tel &&
-        this.school.account &&
-        this.school.passwords) {
-        const [updatedSchool] = await api.saveSchool(this.school)
-        const devices = this.school.devices
-        this.$emit('update', { ...this.mapSchool(updatedSchool), devices })
-        this.$message.success('更新成功')
-      } else this.$message.error('请填写相关基本信息')
+      this.$refs[this.school.ID].validate(async (valid) => {
+        if (valid) {
+          const [updatedSchool] = await api.saveSchool(this.school).catch(e => this.$message.error(e.toString()))
+          const devices = this.school.devices
+          this.$emit('update', { ...this.mapSchool(updatedSchool), devices })
+          this.$message.success('更新成功')
+        } else this.$message.error('请填写相关基本信息')
+      })
     },
     async saveSchoolDevice (device) {
       if (!isNil(device.name) && !isNil(device.device_status)) {
-        const [updatedDevice] = await api.saveDevice(device)
+        const [updatedDevice] = await api.saveDevice(device).catch(e => this.$message.error(e.toString()))
         const updatedDeviceIndex = this.school.devices.findIndex(device => device.ID === updatedDevice.ID)
         this.$set(this.school.devices, updatedDeviceIndex, { ...updatedDevice, isEdit: false })
         this.$emit('update', this.school)
@@ -296,21 +292,17 @@ export default {
       } else this.$message.error('请填写相关设备信息')
     },
     async addDevice () {
-      try {
-        this.addDeviceLoading = true
-        if (
-          this.addDeviceFrom.name &&
-          !isNil(this.addDeviceFrom.type) &&
-          !isNil(this.addDeviceFrom.device_status)
-        ) {
-          const [addDevice] = await api.addDevice({ ...this.addDeviceFrom, school: this.school.ID })
+      this.addDeviceLoading = true
+      this.$refs['addDevices'].validate(async (valid) => {
+        if (valid) {
+          const [addDevice] = await api.addDevice({ ...this.addDeviceFrom, school: this.school.ID }).catch(e => this.$message.error(e.toString()))
           this.school.devices.push({ ...addDevice, isEdit: false })
           this.$emit('update', this.school)
           this.addDeviceDrawer = false
           this.$message.success('添加成功')
         } else this.$message.error('请填写相关基本信息')
-        this.addDeviceLoading = false
-      } catch (e) { console.log(e) }
+      })
+      this.addDeviceLoading = false
     }
   }
 }

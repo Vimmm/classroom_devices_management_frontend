@@ -19,4 +19,16 @@ export default [{
   name: 'addDevice',
   path: `${PREFIX}/addDevice`,
   method: 'post'
+}, {
+  name: 'getallRepairer',
+  path: `${PREFIX}/getallRepairer`,
+  method: 'get'
+}, {
+  name: 'saveRepairer',
+  path: `${PREFIX}/saveRepairer`,
+  method: 'post'
+}, {
+  name: 'addRepairer',
+  path: `${PREFIX}/addRepairer`,
+  method: 'post'
 }]
