@@ -1,7 +1,6 @@
 <template>
   <div class="repairer layout">
     <slide-bar v-bind="sliderBar"/>
-    <h1>This is an repairer page aa </h1>
     <router-view/>
   </div>
 </template>
