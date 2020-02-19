@@ -21,6 +21,7 @@
 
 <script>
 import api from '../../common/fetch'
+import { NAME_SPACE_REPAIRER } from '../../common/constants/namespace'
 export default {
   name: 'superviseDevices',
   data () {
@@ -44,7 +45,7 @@ export default {
     }
   },
   created () {
-    api.getUserinfo().then(([res]) => {
+    api[NAME_SPACE_REPAIRER].getUserinfo().then(([res]) => {
       this.userInfo = res
     })
   }

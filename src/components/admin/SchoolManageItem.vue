@@ -182,6 +182,7 @@
 
 <script>
 import api from '../../common/fetch'
+import { NAME_SPACE_ADMIN } from '../../common/constants/namespace'
 import isNil from 'lodash/isNil'
 export default {
   props: {
@@ -275,7 +276,7 @@ export default {
     async saveSchoolBaseInfo () {
       this.$refs[this.school.ID].validate(async (valid) => {
         if (valid) {
-          const [updatedSchool] = await api.saveSchool(this.school).catch(e => this.$message.error(e.toString()))
+          const [updatedSchool] = await api[NAME_SPACE_ADMIN].saveSchool(this.school).catch(e => this.$message.error(e.toString()))
           const devices = this.school.devices
           this.$emit('update', { ...this.mapSchool(updatedSchool), devices })
           this.$message.success('更新成功')
@@ -284,7 +285,7 @@ export default {
     },
     async saveSchoolDevice (device) {
       if (!isNil(device.name) && !isNil(device.device_status)) {
-        const [updatedDevice] = await api.saveDevice(device).catch(e => this.$message.error(e.toString()))
+        const [updatedDevice] = await api[NAME_SPACE_ADMIN].saveDevice(device).catch(e => this.$message.error(e.toString()))
         const updatedDeviceIndex = this.school.devices.findIndex(device => device.ID === updatedDevice.ID)
         this.$set(this.school.devices, updatedDeviceIndex, { ...updatedDevice, isEdit: false })
         this.$emit('update', this.school)
@@ -295,7 +296,7 @@ export default {
       this.addDeviceLoading = true
       this.$refs['addDevices'].validate(async (valid) => {
         if (valid) {
-          const [addDevice] = await api.addDevice({ ...this.addDeviceFrom, school: this.school.ID }).catch(e => this.$message.error(e.toString()))
+          const [addDevice] = await api[NAME_SPACE_ADMIN].addDevice({ ...this.addDeviceFrom, school: this.school.ID }).catch(e => this.$message.error(e.toString()))
           this.school.devices.push({ ...addDevice, isEdit: false })
           this.$emit('update', this.school)
           this.addDeviceDrawer = false

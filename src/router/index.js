@@ -72,10 +72,25 @@ const routes = [
   {
     path: '/school',
     name: 'school',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/School.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/School.vue'),
+    redirect: 'school/school-info',
+    children: [
+      {
+        path: 'school-info',
+        name: 'schoolInfo',
+        component: () => import(/* webpackChunkName: "Admin" */ '../components/school/SchoolInfo.vue')
+      },
+      {
+        path: 'device-manage',
+        name: 'deviceManage',
+        component: () => import(/* webpackChunkName: "Admin" */ '../components/school/deviceManage.vue')
+      },
+      {
+        path: 'record-list',
+        name: 'recordList',
+        component: () => import(/* webpackChunkName: "Admin" */ '../components/school/RecordList.vue')
+      }
+    ]
   }
 ]
 

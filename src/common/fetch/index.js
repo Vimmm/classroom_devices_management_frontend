@@ -5,10 +5,10 @@ import loginConfig from './config/login'
 import adminConfig from './config/admin'
 
 const configs = [].concat(
-  schoolConfig,
-  repairerConfig,
-  loginConfig,
-  adminConfig
+  schoolConfig.config.map(it => ({ ...it, namespace: schoolConfig.namespace })),
+  repairerConfig.config.map(it => ({ ...it, namespace: repairerConfig.namespace })),
+  loginConfig.config.map(it => ({ ...it, namespace: loginConfig.namespace })),
+  adminConfig.config.map(it => ({ ...it, namespace: adminConfig.namespace }))
 )
 const SUCCESS = 0
 
@@ -30,7 +30,10 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error)
 })
 
-export default configs.reduce((fetchs, conf) => {
-  fetchs[conf.name] = params => axios[conf.method || 'get'](conf.path, createAxiosConf(conf.method, params))
-  return fetchs
-}, {})
+export default configs.reduce((fetchs, conf) => ({
+  ...fetchs,
+  [conf.namespace]: {
+    ...fetchs[conf.namespace],
+    [conf.name]: params => axios[conf.method || 'get'](conf.path, createAxiosConf(conf.method, params))
+  }
+}), {})

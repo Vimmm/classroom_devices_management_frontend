@@ -7,6 +7,8 @@
 
 <script>
 import SlideBar from '../components/common/sliderbar'
+import api from '../common/fetch'
+import { NAME_SPACE_REPAIRER } from '../common/constants/namespace'
 export default {
   name: 'Repairer',
   data () {
@@ -32,6 +34,11 @@ export default {
   },
   components: {
     SlideBar
+  },
+  created () {
+    api[NAME_SPACE_REPAIRER].getUserinfo().then(([user]) => {
+      this.sliderBar.identity = user.name
+    })
   }
 }
 </script>

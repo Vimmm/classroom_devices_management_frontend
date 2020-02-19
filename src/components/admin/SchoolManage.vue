@@ -48,6 +48,7 @@
 
 <script>
 import api from '../../common/fetch'
+import { NAME_SPACE_ADMIN } from '../../common/constants/namespace'
 import isNil from 'lodash/isNil'
 import SchoolManageItem from './SchoolManageItem'
 
@@ -102,7 +103,7 @@ export default {
     }
   },
   created () {
-    api.getAllSchool().then(res => {
+    api[NAME_SPACE_ADMIN].getAllSchool().then(res => {
       this.schools = res.map(school => this.mapSchool(school))
       this.activeName = this.schools[0].ID
     }).catch(err => this.$message.error(err.toString()))
@@ -131,7 +132,7 @@ export default {
         this.addSchoolFrom.tel &&
         this.addSchoolFrom.account &&
         this.addSchoolFrom.passwords) {
-        const [addSchool] = await api.addSchool(this.addSchoolFrom).catch(e => this.$message.error(e.toString()))
+        const [addSchool] = await api[NAME_SPACE_ADMIN].addSchool(this.addSchoolFrom).catch(e => this.$message.error(e.toString()))
         this.schools.push({ ...this.mapSchool(addSchool), devices: [] })
         this.addSchoolDrawer = false
         this.$message.success('添加成功')

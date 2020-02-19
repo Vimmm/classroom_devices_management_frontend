@@ -25,6 +25,7 @@
 
 <script>
 import api from '../common/fetch'
+import { NAME_SPACE_COMMON } from '../common/constants/namespace'
 export default {
   name: 'Login',
   data () {
@@ -39,7 +40,7 @@ export default {
   },
   methods: {
     onSubmit () {
-      api.login(this.form).then(res => {
+      api[NAME_SPACE_COMMON].login(this.form).then(res => {
         this.$router.push(res)
       })
         .catch(err => {

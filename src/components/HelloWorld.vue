@@ -18,6 +18,7 @@
 
 <script>
 import api from '../common/fetch'
+import { NAME_SPACE_ADMIN } from '../common/constants/namespace'
 export default {
   name: 'HelloWorld',
   props: {
@@ -29,7 +30,7 @@ export default {
     }
   },
   async mounted () {
-    api.getAllSchool().then(res => {
+    api[NAME_SPACE_ADMIN].getAllSchool().then(res => {
       this.schools = res
     }).catch(err => this.$message.error(err.toString()))
   }

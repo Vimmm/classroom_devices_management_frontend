@@ -9,6 +9,7 @@
 
 <script>
 import api from '../../common/fetch'
+import { NAME_SPACE_ADMIN } from '../../common/constants/namespace'
 export default {
   name: 'statisticCharts',
   data () {
@@ -39,8 +40,8 @@ export default {
   mounted () {
     this.chart = this.$echarts.init(document.getElementById('mycharts'))
     Promise.all([
-      api.getCharts(),
-      api.getAllSchool()
+      api[NAME_SPACE_ADMIN].getCharts(),
+      api[NAME_SPACE_ADMIN].getAllSchool()
     ])
       .then(([records, schools]) => {
         this.source = records.reduce((data, item) => {

@@ -61,6 +61,7 @@
 
 <script>
 import api from '../../common/fetch'
+import { NAME_SPACE_REPAIRER } from '../../common/constants/namespace'
 
 export default {
   props: {
@@ -147,7 +148,7 @@ export default {
     }
   },
   created () {
-    api.getApplyrecords({
+    api[NAME_SPACE_REPAIRER].getApplyrecords({
       status: this.status
     }).then(res => { this.applyRecords = res })
   },
@@ -159,11 +160,11 @@ export default {
       // else console.log('123')
     },
     async changeRecords () {
-      if (await api.changerecordstatus({
+      if (await api[NAME_SPACE_REPAIRER].changerecordstatus({
         ID: this.currentId, status: this.nextStatus, wait_time: this.waitTime
       })) {
         this.waitTime = null
-        api.getApplyrecords({
+        api[NAME_SPACE_REPAIRER].getApplyrecords({
           status: this.status
         }).then(res => { this.applyRecords = res })
       } else this.$message.error('处理失败')

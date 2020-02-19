@@ -102,6 +102,7 @@
 
 <script>
 import api from '../../common/fetch'
+import { NAME_SPACE_ADMIN } from '../../common/constants/namespace'
 
 export default {
   name: 'repairerManage',
@@ -143,8 +144,8 @@ export default {
   },
   created () {
     Promise.all([
-      api.getallRepairer(),
-      api.getAllSchool()
+      api[NAME_SPACE_ADMIN].getallRepairer(),
+      api[NAME_SPACE_ADMIN].getAllSchool()
     ])
       .then(([repairers, schools]) => {
         this.repairers = repairers.map(repairer => this.mapRepairer(repairer))
@@ -162,7 +163,7 @@ export default {
     saveRepairerBaseInfo (repairer) {
       this.$refs[repairer.ID][0].validate(async (valid) => {
         if (valid) {
-          const [updatedRepairer] = await api.saveRepairer(repairer).catch(e => this.$message.error(e.toString()))
+          const [updatedRepairer] = await api[NAME_SPACE_ADMIN].saveRepairer(repairer).catch(e => this.$message.error(e.toString()))
           const updatedRepairerIndex = this.repairers.findIndex(it => it.ID === updatedRepairer.ID)
           this.$set(this.repairers, updatedRepairerIndex, this.mapRepairer(updatedRepairer))
           this.$message.success('更新成功')
@@ -173,7 +174,7 @@ export default {
       this.addRepairerLoading = true
       this.$refs['addRepairer'].validate(async (valid) => {
         if (valid) {
-          const [updatedRepairer] = await api.addRepairer(this.addRepairerForm).catch(e => this.$message.error(e.toString()))
+          const [updatedRepairer] = await api[NAME_SPACE_ADMIN].addRepairer(this.addRepairerForm).catch(e => this.$message.error(e.toString()))
           this.repairers.push(this.mapRepairer(updatedRepairer))
           this.addRepairerDrawer = false
           this.$message.success('添加成功')

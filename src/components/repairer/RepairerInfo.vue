@@ -34,6 +34,7 @@
 
 <script>
 import api from '../../common/fetch'
+import { NAME_SPACE_REPAIRER } from '../../common/constants/namespace'
 
 export default {
   name: 'repairerInfo',
@@ -63,13 +64,13 @@ export default {
     }
   },
   created () {
-    api.getUserinfo().then(([res]) => {
+    api[NAME_SPACE_REPAIRER].getUserinfo().then(([res]) => {
       this.userInfo = { ...res, isEdit: false }
     })
   },
   methods: {
     saveUserInfo () {
-      api.saveUserinfo(this.userInfo).then(([res]) => {
+      api[NAME_SPACE_REPAIRER].saveUserinfo(this.userInfo).then(([res]) => {
         console.log(res)
         this.userInfo = { ...res, isEdit: false }
       })
