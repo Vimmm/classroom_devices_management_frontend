@@ -32,12 +32,20 @@ export default {
     width:160px;
     flex-shrink: 0;
     background-color: #1295d9;
+    text-align: center;
     .identity {
-        margin: 10px;
-        .photo {
-            width: 80px;
-            height: 80px;
-        }
+      margin: 15px 10px 10px;
+      .photo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+      p{
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: bold;
+        margin: 5px 0 15px;
+      }
     }
     .menus {
         width: 100%;

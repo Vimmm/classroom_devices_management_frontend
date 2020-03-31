@@ -20,7 +20,7 @@
               :value="item.value">
             </el-option>
           </el-select>
-          <p>{{(schoolTypeOptions.find(option => option.value === school.type) || {}).label}}</p>
+          <p v-else>{{(schoolTypeOptions.find(option => option.value === school.type) || {}).label}}</p>
         </el-form-item>
         <el-form-item class="base-form-item" label="地址：" prop="location">
           <el-input v-if="school.isEdit" v-model="school.location" placeholder="请输入地址" />
@@ -31,8 +31,7 @@
           <p v-else>{{school.tel}}</p>
         </el-form-item>
         <el-form-item class="base-form-item" label="账号：" prop="account">
-          <el-input v-if="school.isEdit" v-model="school.account" placeholder="请输入账号" />
-          <p v-else>{{school.account}}</p>
+          <p>{{school.account}}</p>
         </el-form-item>
         <el-form-item class="base-form-item" label="密码：" prop="passwords">
           <el-input v-if="school.isEdit" v-model="school.passwords" placeholder="请输入密码" />
@@ -181,9 +180,36 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  .base-card {
-    box-sizing: border-box;
-    margin: 10px;
+    .base-card {
+      // flex-grow: 1;
+      box-sizing: border-box;
+      margin: 10px;
+      .base-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+      }
+      .base-form {
+        display: flex;
+        flex-wrap: wrap;
+        .base-form-item {
+          flex-grow: 1;
+          flex-shrink: 0;
+          width: 40%;
+        }
+      }
+      .base-wrap {
+        .base-item {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-bottom: 10px;
+          .base-label {
+            width: 40px;
+          }
+        }
+      }
+    }
   }
-}
 </style>

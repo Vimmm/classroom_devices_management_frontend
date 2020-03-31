@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       sliderBar: {
-        img: 'https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top-e3b63a0b1b.png',
+        img: 'https://i.ibb.co/TmDjsLj/school.jpg',
         identity: '教学点',
         menuList: [{
           text: '教学点信息',
@@ -25,6 +25,9 @@ export default {
         }, {
           text: '维修记录',
           name: 'recordList'
+        }, {
+          text: '常见问题',
+          name: 'commonProblem'
         }]
       }
     }

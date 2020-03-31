@@ -1,6 +1,9 @@
 <template>
   <div class="repairer-manage">
-    <el-button class="add-repairer-button" type="text" @click="addRepairerDrawer = true">添加维修员</el-button>
+    <el-button class="add-repairer-button" type="text" @click="addRepairerDrawer = true">
+      <i class="el-icon-circle-plus-outline"></i>
+      添加维修员
+      </el-button>
     <el-collapse accordion v-model="activeName">
         <el-collapse-item
           class="repairer-header"
@@ -60,7 +63,7 @@
       :visible.sync="addRepairerDrawer"
       direction="rtl"
       >
-      <div class="add-school-drawer">
+      <div class="add-school-drawer" style="margin:10px;">
         <el-form :model="addRepairerForm" :rules="rules" ref="addRepairer">
           <el-form-item label="姓名：" prop="name">
             <el-input v-model="addRepairerForm.name" placeholder="请输入姓名" />
@@ -187,6 +190,10 @@ export default {
 
 <style lang="less" scoped>
 .repairer-manage {
+  .add-repairer-button {
+    width:100%;
+    font-size: 14px;
+  }
   .add-school-button {
     width: 100%;
   }
@@ -197,5 +204,11 @@ export default {
       align-items: center;
     }
   }
+}
+</style>
+<style lang="less">
+.el-collapse-item__header {
+  font-size: 14px;
+  font-weight: bold;
 }
 </style>

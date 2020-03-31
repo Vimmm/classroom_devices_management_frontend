@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       sliderBar: {
-        img: 'https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top-e3b63a0b1b.png',
+        img: 'https://i.ibb.co/ZLq3fVN/repairer.jpg',
         identity: '维修员',
         menuList: [{
           text: '个人信息',
@@ -25,9 +25,6 @@ export default {
         }, {
           text: '维修列表',
           name: 'repairList'
-        }, {
-          text: '问题更新',
-          name: 'questionUpdate'
         }]
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="siteUpdate">
+  <div class="commonProblem">
     <el-tabs :tab-position="tabPosition">
       <el-tab-pane v-for="(pane, i) in paneList" :key="i" :label="pane.label">
         <div v-for="(link,i) in pane.linkList" :key="i">
@@ -14,7 +14,7 @@
 <script>
 import ContentItem from './ContentItem'
 export default {
-  name: 'siteUpdate',
+  name: 'commonProblem',
   components: {
     ContentItem
   },
@@ -59,10 +59,18 @@ export default {
 </script>
 
 <style lang="less">
-.siteUpdate {
+.commonProblem {
+  box-sizing: border-box;
+  -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    -webkit-box-sizing: border-box;
   border: 1px solid #eee;
- padding: 30px 10px;
-  margin-bottom:30px;
+ padding: 10px 10px 20px 15px;
+ box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  margin: 10px 10px 30px;
 }
 
 </style>

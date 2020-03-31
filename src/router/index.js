@@ -11,84 +11,94 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "Admin" */ '../views/Login.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/admin',
     name: 'admin',
-    component: () => import(/* webpackChunkName: "Admin" */ '../views/Admin.vue'),
+    component: () => import('../views/Admin.vue'),
     redirect: 'admin/school-manage',
     children: [
       {
         path: 'school-manage',
         name: 'schoolManage',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/admin/SchoolManage.vue')
+        component: () => import('../components/admin/SchoolManage.vue')
       },
       {
         path: 'repairer-manage',
         name: 'repairerManage',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/admin/RepairerManage.vue')
+        component: () => import('../components/admin/RepairerManage.vue')
+      },
+      {
+        path: 'allrecord-list',
+        name: 'allRecordList',
+        component: () => import('../components/admin/AllRecordList.vue')
       },
       {
         path: 'statistic-charts',
         name: 'statisticCharts',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/admin/StatisticCharts.vue')
+        component: () => import('../components/admin/StatisticCharts.vue')
       },
       {
         path: 'site-update',
         name: 'siteUpdate',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/admin/SiteUpdate.vue')
+        component: () => import('../components/admin/SiteUpdate.vue')
       }
     ]
   },
   {
     path: '/repairer',
     name: 'repairer',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Repairer.vue'),
+    component: () => import('../views/Repairer.vue'),
     redirect: 'repairer/repairer-info',
     children: [
       {
         path: 'repairer-info',
         name: 'repairerInfo',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/repairer/RepairerInfo.vue')
+        component: () => import('../components/repairer/RepairerInfo.vue')
       },
       {
         path: 'supervise-devices',
         name: 'superviseDevices',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/repairer/SuperviseDevices.vue')
+        component: () => import('../components/repairer/SuperviseDevices.vue')
       },
       {
         path: 'repair-list',
         name: 'repairList',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/repairer/RepairList.vue')
+        component: () => import('../components/repairer/RepairList.vue')
       },
       {
         path: 'question-update',
         name: 'questionUpdate',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/repairer/QuestionUpdate.vue')
+        component: () => import('../components/repairer/QuestionUpdate.vue')
       }
     ]
   },
   {
     path: '/school',
     name: 'school',
-    component: () => import(/* webpackChunkName: "about" */ '../views/School.vue'),
+    component: () => import('../views/School.vue'),
     redirect: 'school/school-info',
     children: [
       {
         path: 'school-info',
         name: 'schoolInfo',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/school/SchoolInfo.vue')
+        component: () => import('../components/school/SchoolInfo.vue')
       },
       {
         path: 'device-manage',
         name: 'deviceManage',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/school/deviceManage.vue')
+        component: () => import('../components/school/deviceManage.vue')
       },
       {
         path: 'record-list',
         name: 'recordList',
-        component: () => import(/* webpackChunkName: "Admin" */ '../components/school/RecordList.vue')
+        component: () => import('../components/school/RecordList.vue')
+      },
+      {
+        path: 'common-problem',
+        name: 'commonProblem',
+        component: () => import('../components/school/CommonProblem.vue')
       }
     ]
   }

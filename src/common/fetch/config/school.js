@@ -27,5 +27,9 @@ export default {
     name: `changeDevicestatus`,
     path: `${PREFIX}/changeDevicestatus`,
     method: 'post'
+  }, {
+    name: `getSchoolRepairecord`,
+    path: `${PREFIX}/getSchoolRepairecord`,
+    method: 'get'
   }]
 }

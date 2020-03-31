@@ -14,7 +14,7 @@
             <div class="grid-content bg-purple">
                 <div class="loginout">
                     <i class="el-icon-s-custom"></i>
-                    <el-button type="text" style="color:#fff;">退出</el-button>
+                    <el-button type="text" style="color:#fff;" @click="logoutHandler">退出</el-button>
                 </div>
             </div>
         </el-col>
@@ -22,11 +22,18 @@
 </template>
 
 <script>
+import api from '../../common/fetch'
+import { NAME_SPACE_COMMON } from '../../common/constants/namespace'
 export default {
   name: 'headers',
   data () {
     return {
       logoText: require('../../assets/images/hd_logo.png')
+    }
+  },
+  methods: {
+    logoutHandler () {
+      api[NAME_SPACE_COMMON].logout().then(res => { this.$router.push(res) })
     }
   }
 }

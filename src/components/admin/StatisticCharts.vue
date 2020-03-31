@@ -1,6 +1,5 @@
 <template>
   <div class="statisticCharts">
-    <h1>This is an StatisticCharts page</h1>
     <div class="charts">
       <div class="chart" id="mycharts"></div>
     </div>
@@ -22,7 +21,7 @@ export default {
     options () {
       return {
         title: {
-          text: '教学点维修统计'
+          text: '维修次数'
         },
         tooltip: {},
         xAxis: {
@@ -32,6 +31,9 @@ export default {
         series: [{
           name: '次数',
           type: 'bar',
+          itemStyle: {
+            color: "rgb(143,185,228)"
+          },
           data: this.source.map(it => it.count)
         }]
       }

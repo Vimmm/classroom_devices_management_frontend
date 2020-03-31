@@ -1,6 +1,8 @@
 <template>
   <div class="schoolManage">
-    <el-button class="add-school-button" type="text" @click="addSchoolDrawer = true">添加教学点</el-button>
+    <el-button class="add-school-button" type="text" @click="addSchoolDrawer = true">
+      <i class="el-icon-circle-plus-outline"></i>
+      添加教学点</el-button>
     <el-collapse accordion  v-model="activeName">
       <school-manage-item v-for="school in schools" :key="school.ID" :school="school" @update="updateSchool"/>
     </el-collapse>
@@ -150,6 +152,7 @@ export default {
     padding: 10px;
   }
   .add-school-button, .add-device-button {
+    font-size: 14px;
     width: 100%;
   }
   .base-cards {
@@ -184,6 +187,6 @@ export default {
       }
     }
   }
-  }
+}
 
 </style>

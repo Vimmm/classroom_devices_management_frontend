@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       sliderBar: {
-        img: 'https://dss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top-e3b63a0b1b.png',
+        img: 'https://i.ibb.co/sCpTKmJ/admin.jpg',
         identity: '管理员',
         menuList: [{
           text: '教学点管理',
@@ -20,6 +20,9 @@ export default {
         }, {
           text: '维修员管理',
           name: 'repairerManage'
+        }, {
+          text: '维修记录',
+          name: 'allRecordList'
         }, {
           text: '统计报表',
           name: 'statisticCharts'
@@ -41,7 +44,7 @@ export default {
     flex-grow: 1;
     flex-shrink: 1;
     box-sizing: border-box;
-    padding: 20px 0 0 20px;
+    padding: 10px 0 20px 15px;
   }
   // height: 20000px;
 }

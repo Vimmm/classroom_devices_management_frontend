@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <img :src="imgSrc" class="logo">
-    <h1 class="title">同步课堂维修系统</h1>
-    <el-form ref="form" :model="form" label-width="50px" label-position="left" class="loginForm">
+    <h1 class="title">同步课堂设备维修系统</h1>
+    <el-form size="medium" ref="form" :model="form" label-width="50px" label-position="left" class="loginForm">
       <el-form-item label="账号">
         <el-input v-model="form.inputAccount" placeholder="请输入账号" clearable></el-input>
       </el-form-item>
@@ -53,10 +53,12 @@ export default {
 
 <style lang="less" scoped>
 .login {
+  text-align: center;
   .logo {
     width: 120px;
     height: 120px;
     margin: 25px auto;
+
   }
   .title {
     font-family: "楷体";

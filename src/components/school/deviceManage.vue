@@ -4,15 +4,24 @@
       <div slot="header" class="base-header">
         <span>设备信息</span>
       </div>
-      <el-button class="add-device-button" type="text" @click="addDeviceDrawer = true">添加设备</el-button>
-      <el-table :data="school.devices" stripe border style="width: 100%">
-        <el-table-column show-overflow-tooltip label="名称" min-width="50">
+      <el-button class="add-device-button" type="text" @click="addDeviceDrawer = true">
+        <i class="el-icon-circle-plus-outline"></i>
+        添加设备
+      </el-button>
+      <el-table
+        :data="school.devices"
+        stripe
+        border
+        style="width: 780px;"
+        :header-row-class-name="() => 'device-table-header'"
+        >
+        <el-table-column fixed show-overflow-tooltip label="名称" width="100">
           <template slot-scope="scope">
             <el-input v-if="scope.row.isEdit" v-model="scope.row.name" placeholder="请输入名称" />
             <p v-else>{{scope.row.name}}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="类型" min-width="50">
+        <el-table-column show-overflow-tooltip label="类型" width="100">
           <template slot-scope="scope">
             <el-select v-if="scope.row.isEdit" v-model="scope.row.type" placeholder="请选择类型">
               <el-option
@@ -25,37 +34,37 @@
             <p v-else>{{deviceTypeOptions.find(option => option.value === scope.row.type).label}}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="编号" min-width="50">
+        <el-table-column show-overflow-tooltip label="编号" width="100">
           <template slot-scope="scope">
             <el-input v-if="scope.row.isEdit" v-model="scope.row.device_number" placeholder="请输入编号" />
             <p v-else>{{scope.row.device_number}}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="型号" min-width="50">
+        <el-table-column show-overflow-tooltip label="型号" width="100">
           <template slot-scope="scope">
             <el-input v-if="scope.row.isEdit" v-model="scope.row.device_model" placeholder="请输入型号" />
             <p v-else>{{scope.row.device_model}}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="生产日期" min-width="50">
+        <el-table-column show-overflow-tooltip label="生产日期" width="100">
           <template slot-scope="scope">
             <el-date-picker v-if="scope.row.isEdit" v-model="scope.row.product_time" type="date" placeholder="选择日期" format="yyyy/M/dd" value-format="timestamp" />
-            <p v-else>{{ new Date(scope.row.product_time).toLocaleDateString() }}</p>
+            <p v-else>{{ scope.row.product_time | formatterDate }}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="安装时间" min-width="50">
+        <el-table-column show-overflow-tooltip label="安装时间" width="100">
           <template slot-scope="scope">
             <el-date-picker v-if="scope.row.isEdit" v-model="scope.row.start_time" type="date" placeholder="选择日期" format="yyyy/M/dd" value-format="timestamp" />
-            <p v-else>{{ new Date(scope.row.start_time).toLocaleDateString() }}</p>
+            <p v-else>{{ scope.row.start_time | formatterDate }}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="预计报废时间" min-width="50">
+        <el-table-column show-overflow-tooltip label="预计报废时间" width="100">
           <template slot-scope="scope">
             <el-date-picker v-if="scope.row.isEdit" v-model="scope.row.end_time" type="date" placeholder="选择日期" format="yyyy/M/dd" value-format="timestamp" />
-            <p v-else>{{ new Date(scope.row.end_time).toLocaleDateString() }}</p>
+            <p v-else>{{ scope.row.end_time | formatterDate }}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="设备状态" min-width="50">
+        <el-table-column show-overflow-tooltip label="设备状态" width="100" fixed="right">
           <template slot-scope="scope">
             <el-select v-if="scope.row.isEdit" v-model="scope.row.device_status" placeholder="请选择状态">
               <el-option
@@ -68,13 +77,13 @@
             <p v-else>{{ deviceStatusOptions.find(option => option.value === scope.row.device_status).label }}</p>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="编辑" width="55">
+        <el-table-column show-overflow-tooltip label="编辑" width="100" fixed="right">
           <template slot-scope="scope">
             <el-button v-if="scope.row.isEdit" @click="saveSchoolDevice(scope.row)" type="text" size="small">保存</el-button>
             <el-button v-else @click="scope.row.isEdit = true" type="text" size="small">编辑</el-button>
           </template>
         </el-table-column>
-        <el-table-column show-overflow-tooltip label="报修" width="55">
+        <el-table-column show-overflow-tooltip label="报修" width="100" fixed="right">
           <template slot-scope="scope">
             <el-button @click="applyRepair(scope.row.ID)" :disabled="scope.row.device_status !== 0" type="text" size="small">报修</el-button>
           </template>
@@ -298,6 +307,31 @@ export default {
   .base-card {
     box-sizing: border-box;
     margin: 10px;
+    .base-header {
+      font-size: 14px;
+    }
   }
+  .el-card__body {
+    .add-device-button {
+      font-size: 14px;
+      width: 100%;
+    }
+  }
+  .add-school-drawer {
+    box-sizing: border-box;
+    padding: 10px;
+  }
+}
+</style>
+<style lang="less">
+.device-table-header th{
+  background: #F5F7FA;
+  color: #666;
+  font-weight: bold;
+  text-align: center;
+}
+.el-table .cell.el-tooltip p,
+.el-table .cell.el-tooltip{
+  text-align: center;
 }
 </style>

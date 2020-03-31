@@ -5,6 +5,7 @@
       <template slot="title" class="repair-item-title">
         <div class="repair-item-title">
           <div class="repair-item-title-content">
+            <p class="repair-item-title-content-main" v-if="status===1">上门维修时间{{ records.wait_time | formatterDate }}</p>
             <p class="repair-item-title-content-main">{{records.schoolInfo.name}}</p>
             <p class="repair-item-title-content-comment">{{records.comment}}</p>
           </div>
@@ -14,11 +15,12 @@
         </div>
       </template>
       <p>备注：{{records.comment}}</p>
-      <p>创建时间：{{new Date(records.create_time).toLocaleDateString()}}</p>
-      <p>受理时间：{{new Date(records.accept_time).toLocaleDateString()}}</p>
-      <p>维修时间：{{new Date(records.repair_time).toLocaleDateString()}}</p>
-      <p>完成时间：{{new Date(records.finish_time).toLocaleDateString()}}</p>
-      <p>等待时间：{{new Date(records.wait_time).toLocaleDateString()}}</p>
+      <p>创建时间：{{ records.create_time | formatterDate }}</p>
+      <p>受理时间：{{ records.accept_time | formatterDate }}</p>
+      <p>维修员预计到达时间：{{ records.wait_time | formatterDate }}</p>
+      <p>维修时间：{{ records.repair_time | formatterDate }}</p>
+      <p>完成时间：{{ records.finish_time | formatterDate }}</p>
+
       <div class="repair-item-detail">
         <el-card class="repair-item-card" header="学校信息" shadow="hover" v-if="records.schoolInfo">
           <p>名称：{{records.schoolInfo.name}}</p>
@@ -39,14 +41,14 @@
               {{deviceStatus[records.deviceInfo.device_status].text}}
             </el-tag>
           </p>
-          <p>生产时间：{{new Date(records.deviceInfo.product_time).toLocaleDateString()}}</p>
-          <p>安装时间：{{new Date(records.deviceInfo.start_time).toLocaleDateString()}}</p>
-          <p>报废时间：{{new Date(records.deviceInfo.end_time).toLocaleDateString()}}</p>
+          <p>生产时间：{{ records.deviceInfo.product_time | formatterDate }}</p>
+          <p>安装时间：{{ records.deviceInfo.start_time | formatterDate }}</p>
+          <p>报废时间：{{ records.deviceInfo.end_time | formatterDate }}</p>
         </el-card>
       </div>
     </el-collapse-item>
   </el-collapse>
-  <el-dialog title="选择等待时间" :visible.sync="waitTimeDialog">
+  <el-dialog title="选择预计出发维修时间" :visible.sync="waitTimeDialog">
     <el-date-picker
       v-model="waitTime"
       type="date"
@@ -54,7 +56,7 @@
       value-format="timestamp"
       placeholder="选择日期">
     </el-date-picker>
-    <el-button @click="changeRecords">完成</el-button>
+    <el-button @click="changeRecords" :disabled="waitTime===null">完成</el-button>
   </el-dialog>
 </div>
 </template>
@@ -93,7 +95,6 @@ export default {
         }
       },
       schoolStatus: {
-        // 0正常，1待维修，2报废
         1: {
           text: '教学点',
           type: 'success'
@@ -189,6 +190,7 @@ export default {
       p {
         margin-right: 20px;
         flex-shrink: 0;
+        font-size: 14px;
       }
       .repair-item-title-content-comment {
         width: 550px;

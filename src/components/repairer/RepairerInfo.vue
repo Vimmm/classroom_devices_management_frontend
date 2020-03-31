@@ -73,7 +73,8 @@ export default {
       api[NAME_SPACE_REPAIRER].saveUserinfo(this.userInfo).then(([res]) => {
         console.log(res)
         this.userInfo = { ...res, isEdit: false }
-      })
+        this.$message.success('更新成功')
+      }).catch(_ => this.$message.error('更新失败'))
     }
   },
   activated () { console.log(1) }
